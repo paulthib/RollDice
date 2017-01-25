@@ -14,7 +14,7 @@ namespace RollDice.Biz
             Random random = new Random();
             for (int i = 0; i < numberOfDice; i++)
             {
-                diceModel[i] = random.Next(1, 6);
+                diceModel.Dice.Add(random.Next(1, 6));
             }
             return diceModel;
         }

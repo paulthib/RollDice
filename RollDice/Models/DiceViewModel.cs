@@ -15,8 +15,8 @@ namespace DiceThrow.Models
             DiceImages = new List<string>();
             for (int i = 0; i < diceModel.Count; i++)
             {
-                Dice.Add(diceModel[i]);
-                DiceImages.Add(string.Format(FMT,diceModel[i]));
+                Dice.Add(diceModel.Dice[i]);
+                DiceImages.Add(string.Format(FMT,diceModel.Dice[i]));
 
             }
         }

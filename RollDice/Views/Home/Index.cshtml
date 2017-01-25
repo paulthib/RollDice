@@ -1,20 +1,31 @@
 ﻿@{
     ViewBag.Title = "Home Page";
-    var dice1 = @"..\images\die_face_1.png";
-    var dice2 = @"..\images\die_face_2.png";
 }
 
 <div class="jumbotron">
     <h1>Vail Resorts</h1>
     <p class="lead">Roll the dice...</p>
     <p class="lead">Number of dice : @Html.DropDownList("NumberOfDice", Enumerable.Range(1, 6).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString(), Selected = (i==2) })) </p>
-    <p>@Html.ActionLink("Roll", "RollDice", null, new { @class = "btn btn-primary btn-lg", id = "btn-roll-dice" }) <a id ="clearView" class = "btn btn-primary btn-lg">Clear</a></p>
+
+    <div class="row">
+        <div class="col-md-2">
+            @Html.ActionLink("Roll", "RollDice", null, new { @class = "btn btn-primary btn-lg", id = "btn-roll-dice" })
+        </div>
+        <div class="col-md-2">
+            <a id="clearView" class="btn btn-primary btn-lg">Clear</a>
+        </div>
+        <div class="col-md-2">
+            <a href="@ViewBag.WebApiUrl" class="btn btn-primary btn-lg" title="@ViewBag.WebApiUrl">Roll 2 Via Web API Call</a>
+        </div>
+    </div>
+
 </div>
 <div id="results">
 </div>
 
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
- <script type="text/javascript">
+
+@section Scripts {
+<script type="text/javascript">
         $(document).ready(function () {
 
             $("#btn-roll-dice").click(function (event) {
@@ -52,3 +63,6 @@
 
         });
 </script>
+}
+
+
