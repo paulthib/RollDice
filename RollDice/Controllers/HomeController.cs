@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DiceThrow.Models;
+using Newtonsoft.Json;
+using RollDice.Biz;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -26,5 +29,17 @@ namespace RollDice.Controllers
 
             return View();
         }
+
+        public JsonResult RollDice()
+        {
+            DiceRoller diceRoller = new DiceRoller();
+
+            DiceViewModel diceViewModel = new DiceViewModel(diceRoller.Roll());
+
+            //return Json("HELLO", JsonRequestBehavior.AllowGet);
+            var x = JsonConvert.SerializeObject(diceViewModel);
+            return Json(diceViewModel , JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
