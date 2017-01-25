@@ -29,27 +29,17 @@
                     data: { a: "testing" },
                     dataType: "json",
                     success: function (data) {
-                        console.log('Success = ' + data);
-                        console.log('dice = ' + data.Dice);
                         successFunc(data);
                     },
                     error: errorFunc
                 });
             });
 
-
-
-            //function successFunc(data, status) {
-            //    alert(data);
-            //}
-
             function errorFunc() {
                 alert('error');
             }
 
             function successFunc(data) {
-                console.log(data.DiceImages[0]);
-                //$('#dice1').src = "..\images\die_face_2.png";
                 d = new Date();
                 $("#dice1").attr("src", data.DiceImages[0] + "?" + d.getTime());
                 $("#dice2").attr("src", data.DiceImages[1] + "?" + d.getTime());

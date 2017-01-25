@@ -9,6 +9,7 @@ namespace RollDice.Biz
     {
         public DiceModel Roll()
         {
+            //TODO - allow for a variable number of dice
             DiceModel diceModel = new DiceModel(2);
             Random random = new Random();
             diceModel[0] = random.Next(1, 6);
