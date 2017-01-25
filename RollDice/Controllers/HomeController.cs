@@ -11,6 +11,11 @@ namespace RollDice.Controllers
 {
     public class HomeController : Controller
     {
+        private IDiceRoller _diceRoller;
+        public HomeController(IDiceRoller diceRoller)
+        {
+            _diceRoller = diceRoller;
+        }
         public ActionResult Index()
         {
             return View();
@@ -19,8 +24,7 @@ namespace RollDice.Controllers
 
         public JsonResult RollDice()
         {
-            DiceRoller diceRoller = new DiceRoller();
-            DiceViewModel diceViewModel = new DiceViewModel(diceRoller.Roll());
+            DiceViewModel diceViewModel = new DiceViewModel(_diceRoller.Roll());
             return Json(diceViewModel , JsonRequestBehavior.AllowGet);
         }
 
