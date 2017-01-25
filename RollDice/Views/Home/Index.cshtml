@@ -8,7 +8,7 @@
     <h1>Vail Resorts</h1>
     <p class="lead">Roll the dice...</p>
     <p class="lead">Number of dice : @Html.DropDownList("NumberOfDice", Enumerable.Range(1, 6).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString(), Selected = (i==2) })) </p>
-    <p>@Html.ActionLink("Roll", "RollDice", null, new { @class = "btn btn-primary btn-lg", id = "btn-roll-dice" })</p>
+    <p>@Html.ActionLink("Roll", "RollDice", null, new { @class = "btn btn-primary btn-lg", id = "btn-roll-dice" }) <a id ="clearView" class = "btn btn-primary btn-lg">Clear</a></p>
 </div>
 <div id="results">
 </div>
@@ -39,10 +39,16 @@
 
             function successFunc(data) {
                 var resultDiv = $("#results");
-                resultDiv.empty();
+                resultDiv.prepend('<br/>')
                 for (var i = 0, len = data.DiceImages.length; i < len; i++) {
-                    resultDiv.append('<img id ="dice1" src=' + data.DiceImages[i]  + ' style="height:100px;width:100px;" />')
+                    resultDiv.prepend('<img id ="dice1" src=' + data.DiceImages[i]  + ' style="height:100px;width:100px;" />')
                 }
             }
+
+            $("#clearView").click(function (event) {
+                event.preventDefault();
+                $("#results").empty();
+            });
+
         });
 </script>
