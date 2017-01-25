@@ -7,13 +7,15 @@ namespace RollDice.Biz
 {
     public class DiceRoller : IDiceRoller
     {
-        public DiceModel Roll()
+        public DiceModel Roll(int numberOfDice)
         {
-            //TODO - allow for a variable number of dice
-            DiceModel diceModel = new DiceModel(2);
+             
+            DiceModel diceModel = new DiceModel(numberOfDice);
             Random random = new Random();
-            diceModel[0] = random.Next(1, 6);
-            diceModel[1] = random.Next(1, 6);
+            for (int i = 0; i < numberOfDice; i++)
+            {
+                diceModel[i] = random.Next(1, 6);
+            }
             return diceModel;
         }
     }

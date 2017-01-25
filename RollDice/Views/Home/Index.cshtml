@@ -7,26 +7,24 @@
 <div class="jumbotron">
     <h1>Vail Resorts</h1>
     <p class="lead">Roll the dice...</p>
+    <p class="lead">Number of dice : @Html.DropDownList("NumberOfDice", Enumerable.Range(1, 6).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString(), Selected = (i==2) })) </p>
     <p>@Html.ActionLink("Roll", "RollDice", null, new { @class = "btn btn-primary btn-lg", id = "btn-roll-dice" })</p>
 </div>
-<div>
-    <img id ="dice1" src="@Url.Content(dice1)" alt="Image" style="height:100px;width:100px;" />
-    <img id ="dice2" src="@Url.Content(dice2)" alt="Image" style="height:100px;width:100px;" />
+<div id="results">
 </div>
 
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
  <script type="text/javascript">
         $(document).ready(function () {
-            var serviceURL = '/AjaxTest/FirstAjax';
 
             $("#btn-roll-dice").click(function (event) {
                 event.preventDefault();
-                //alert("roll dice");
+                var numDice = $("#NumberOfDice").val();
+                var serviceURL = '/Home/RollDice?NumberOfDice=' +numDice;
                 $.ajax({
-                    type: "POST",
-                    url: '@Url.Action("RollDice", "Home")',
+                    type: "GET",
+                    url: serviceURL,
                     contentType: "application/json; charset=utf-8",
-                    data: { a: "testing" },
                     dataType: "json",
                     success: function (data) {
                         successFunc(data);
@@ -40,9 +38,11 @@
             }
 
             function successFunc(data) {
-                d = new Date();
-                $("#dice1").attr("src", data.DiceImages[0] + "?" + d.getTime());
-                $("#dice2").attr("src", data.DiceImages[1] + "?" + d.getTime());
+                var resultDiv = $("#results");
+                resultDiv.empty();
+                for (var i = 0, len = data.DiceImages.length; i < len; i++) {
+                    resultDiv.append('<img id ="dice1" src=' + data.DiceImages[i]  + ' style="height:100px;width:100px;" />')
+                }
             }
         });
 </script>

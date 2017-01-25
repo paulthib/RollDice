@@ -22,9 +22,10 @@ namespace RollDice.Controllers
         }
 
 
-        public JsonResult RollDice()
+        //[HttpPost]
+        public JsonResult RollDice(int NumberOfDice)
         {
-            DiceViewModel diceViewModel = new DiceViewModel(_diceRoller.Roll());
+            DiceViewModel diceViewModel = new DiceViewModel(_diceRoller.Roll(NumberOfDice));
             return Json(diceViewModel , JsonRequestBehavior.AllowGet);
         }
 
